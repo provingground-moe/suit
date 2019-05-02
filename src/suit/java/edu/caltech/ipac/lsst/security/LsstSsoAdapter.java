@@ -94,11 +94,14 @@ public class LsstSsoAdapter implements SsoAdapter {
     }
 
     public void setAuthCredential(HttpServiceInput inputs) {
+//        // to test from a local machine, obtain temptoken and set it directly,
+//        // you also need to set
+//        String tempToken = "short token here";
+//        inputs.setHeader("Authorization", "Bearer " + tempToken);
         Token token = getAuthToken();
         if (token != null && token.get(ID_TOKEN) != null) {
             if (SsoAdapter.requireAuthCredential(inputs.getRequestUrl(), reqAuthHosts)) {
                 inputs.setHeader("Authorization", "Bearer " + token.get(ID_TOKEN));
-
             }
         }
     }
